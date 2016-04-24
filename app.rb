@@ -35,21 +35,10 @@ get '/visit' do
 end
 
 post '/visit' do
-	@username = params[:name]
-	@phone = params[:phone]
-	@datetime = params[:datestamp]
-	@barber = params[:barber]
-	@color = params[:color]
-
-	c = Client.new
-	c.name = @username
-	c.phone = @phone
-	c.datestamp = @datetime
-	c.barber = @barber
-	c.color = @color
+	c = Client.new params[:client]
 	c.save
 
-	erb "<h2>Спасибо #{@username}, вы записались!</h2>"
+	erb "<h2>Спасибо, вы записались!</h2>"
 end
 
 get '/contacts' do
@@ -57,13 +46,8 @@ get '/contacts' do
 end
 
 post '/contacts' do
-	@mail = params[:mail]
-	@message = params[:message]
-
-	c = Contact.new
-	c.mail = @mail
-	c.message = @message
+	c = Contact.new params[:contact]
 	c.save
 
-	erb "<h2>Спасибо за обращение, мы ответим Вам на: #{@mail}</h2>"
+	erb "<h2>Спасибо за обращение, мы ответим Вам на указанный E-mail.</h2>"
 end
