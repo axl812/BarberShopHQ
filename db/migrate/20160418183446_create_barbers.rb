@@ -3,7 +3,7 @@ class CreateBarbers < ActiveRecord::Migration
 		create_table :barbers do |t|
 		  	t.text :name
 		  	
-		  	t.timestamps null: false
+		  	t.timestamps null: true
 		end
 
 		Barber.create :name => 'Jessie Pinkman'
