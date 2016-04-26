@@ -33,6 +33,11 @@ get '/' do
 	erb :index
 end
 
+get '/barber/:id' do
+	erb :barber
+end
+
+
 get '/visit' do
 	@c = Client.new
 	erb :visit
