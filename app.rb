@@ -16,8 +16,8 @@ class Barber < ActiveRecord::Base
 end
 
 class Client < ActiveRecord::Base
-	validates :name, presence: true #функция с параметром1 и параметром2 (хэш)
-	validates :phone, presence: true
+	validates :name, presence: true, length: {minimum: 3} #функция с параметром1 и параметром2 (хэш):  http://guides.rubyonrails.org/active_record_validations.html
+	validates :phone, presence: true 
 	validates :datestamp, presence: true
 	validates :color, presence: true
 end
@@ -26,12 +26,11 @@ class Contact < ActiveRecord::Base
 end
 
 before do
-	@barbers = Barber.order 'created_at desc'
+	@barbers = Barber.order 'created_at' #desc'
 end
 
 get '/' do
-	erb "<h2>Hi, is BarberShopHQ! <br />
-			 Go to tabs site.</h2>"
+	erb :index
 end
 
 get '/visit' do
@@ -45,7 +44,7 @@ post '/visit' do
 	if @c.save # .save принимает значение false если пустой
 		erb "<h2>Спасибо, вы записались!</h2>"
 	else
-		@error = @c.errors.full_messages.first
+		@error = @c.errors.full_messages.first # http://guides.rubyonrails.org/active_record_validations.html
 		erb :visit
 	end
 end
